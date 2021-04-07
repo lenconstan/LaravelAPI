@@ -1,0 +1,2 @@
+Make a new controller for resource routes that only will be consumed by the API:
+    php artisan make:controller ControllerName --api
