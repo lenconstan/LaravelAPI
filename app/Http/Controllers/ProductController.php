@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 
-
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,6 +15,16 @@ class ProductController extends Controller
     public function index()
     {
         return Product::all();
+    }
+
+    /**
+     * Display a paginated listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexPaginated()
+    {
+        return Product::paginate(50);
     }
 
     /**
