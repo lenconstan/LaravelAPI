@@ -33,6 +33,7 @@ Route::get('/products/search/{name}', [ProductController::class, 'search']);
 // Protected routes with Sanctum
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/update', [AuthController::class, 'update']);
 
 
     Route::post('/products', [ProductController::class, 'store']);

@@ -77,6 +77,29 @@ class AuthController extends Controller
 
     }
 
+    public function update(Request $request)
+    {
+        $fields = $request->validate([
+            'email' => 'required|string',
+            'old_password' => 'required|string',
+            'new_password' => 'required|string|confirmed'
+        ]);
+
+        $user  = User::where('email', $fields['email'])->first();
+
+        // Check password
+        if(!$user || !Hash::check($fields['old_password'], $user->password)) {
+            return response([
+                'message' => 'Bad credentials'
+            ], 401);
+        }
+
+        $user->update([
+            'password' => bcrypt($fields['new_password'])
+        ]);
+        return $user;
+    }
+
     public function logout(Request $request) {
         auth()->user()->tokens()->delete();
 
