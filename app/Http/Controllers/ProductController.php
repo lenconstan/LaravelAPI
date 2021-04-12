@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function indexPaginated()
     {
-        return Product::paginate(50);
+        return Product::paginate(4);
     }
 
     /**
