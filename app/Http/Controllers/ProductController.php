@@ -38,10 +38,17 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'category_id' => 'required',
         ]);
 
-        return Product::create($request->all());
+        return Product::create([
+            'name' => $request->name,
+            'category_id' => (int)($request->category_id),
+            'price' => $request->price,
+            'description' => $request->description,
+            'slug' => $request->slug,
+        ]);
     }
 
     /**

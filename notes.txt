@@ -1,2 +1,47 @@
 Make a new controller for resource routes that only will be consumed by the API:
     php artisan make:controller ControllerName --api
+
+
+Create database relation
+    Create model with migration:
+    php artisan make:model Name -m
+
+    In migration add foreignId:
+    $table->foreignId('user_id');
+
+    In model add function:
+    protected $fillable = [
+        "name",
+        **"user_id",
+        "file_path",
+        "created_at",
+        "updated_at"
+    ];
+
+    **public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    Get entries that belong to user:
+    php artisan tinker
+
+        >>> $house = App\Models\House::first();
+    => App\Models\House {#4063
+        id: "1",
+        user_id: "1",
+        name: "sterren",
+        file_path: "Paq3JCm6iZ3ZXqeLecAXQm0OiJEjvY6ifByobqha.png",
+        created_at: "2021-04-19 16:13:15",
+        updated_at: "2021-04-19 16:13:15",
+    }
+    >>> $house->user;
+    => App\Models\User {#4312
+        id: "1",
+        name: "test",
+        email: "test@test.com",
+        email_verified_at: null,
+        #password: "$2y$10$xYGLOz87dkiwQan1gqaD8eomxwVT/Ml1X0qpR/4bzqKrQG6ggyvSq",
+        #remember_token: null,
+        created_at: "2021-04-19 16:12:44",
+        updated_at: "2021-04-19 16:12:44",
+    }

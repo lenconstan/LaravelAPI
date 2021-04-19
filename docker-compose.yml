@@ -1,0 +1,11 @@
+version: '3'
+
+networks:
+    laravue:
+        
+services:
+    nginx:
+        image: nginx:stable-alpine
+        ports:
+            - "8080:80"
+        volumes: ./laravelbackend
