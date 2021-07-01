@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function house() {
-        return $this->hasMany(House::class);
+        return $this->hasMany(Images::class);
     }
 }

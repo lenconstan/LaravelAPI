@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,6 @@ Route::get('/products/search/{name}', [ProductController::class, 'search']);
 
 
 
-
 // Protected routes with Sanctum
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Auth routes    
@@ -50,6 +50,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //House routes
     Route::post('/image', [HouseController::class, 'store']);
     Route::get('/user-images/{user_id}', [UserController::class, 'userImages']);
+
+    Route::post('/firebaseurl', [ImagesController::class, 'store']);
+
 
      
 });

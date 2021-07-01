@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\House;
 
-
+use App\Models\Images;
 use Illuminate\Http\Request;
 
-class HouseController extends Controller
+class ImagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,33 +25,12 @@ class HouseController extends Controller
      */
     public function store(Request $request)
     {
-        // ensure name is given
         $request->validate([
-            'name' => 'required',
+            'url' => 'required',
             'user_id' => 'required',
         ]);
 
-        // ensure the request has a file
-        if ($request->hasFile('file')) {
-            echo 'file found';
-
-            $request->validate([
-                'image' => 'mimes:jpg,jpeg,bmp,png|max:2048'
-            ]);
-
-            // store the file locally
-            $request->file->store('houses', 'public');
-
-            //Store the record using a file hashname
-            return House::create([
-                'name' => $request->name,
-                'user_id' => (int)($request->user_id),
-                'file_path' => $request->file->hashName(),
-            ]);       
-        }
-
-        return response("File does not match criterea", 400);
-
+        return Images::create($request->all());
     }
 
     /**
