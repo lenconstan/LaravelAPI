@@ -9,14 +9,19 @@ class House extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "name",
         "user_id",
-        "file_path",
+        "title",
+        "address",
+        "city",
+        "rooms",
+        "sleepingPlaces",
+        "description",
         "created_at",
         "updated_at"
+
     ];
 
-    // public function user() {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

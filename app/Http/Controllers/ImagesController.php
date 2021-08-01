@@ -14,7 +14,18 @@ class ImagesController extends Controller
      */
     public function index()
     {
-        //
+        return Images::all();
+    }
+
+    /**
+     * Display a listing of the resource per user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user($user_id)
+    {
+        return Images::where('user_id', $user_id)->get();
+
     }
 
     /**
@@ -64,6 +75,7 @@ class ImagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Images::destroy($id);
+        return json_encode("Image ". $id. " has been deleted successfully!");
     }
 }

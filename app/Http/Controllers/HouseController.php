@@ -15,7 +15,7 @@ class HouseController extends Controller
      */
     public function index()
     {
-        //
+        return House::all();
     }
 
     /**
@@ -26,32 +26,17 @@ class HouseController extends Controller
      */
     public function store(Request $request)
     {
-        // ensure name is given
         $request->validate([
-            'name' => 'required',
-            'user_id' => 'required',
+            "title" => 'required',
+            "address" => 'required',
+            "city" => 'required',
+            "rooms" => 'required',
+            "sleepingPlaces" => 'required',
+            "description" => 'required',
+
         ]);
 
-        // ensure the request has a file
-        if ($request->hasFile('file')) {
-            echo 'file found';
-
-            $request->validate([
-                'image' => 'mimes:jpg,jpeg,bmp,png|max:2048'
-            ]);
-
-            // store the file locally
-            $request->file->store('houses', 'public');
-
-            //Store the record using a file hashname
-            return House::create([
-                'name' => $request->name,
-                'user_id' => (int)($request->user_id),
-                'file_path' => $request->file->hashName(),
-            ]);       
-        }
-
-        return response("File does not match criterea", 400);
+        return House::create($request->all());    
 
     }
 
@@ -61,9 +46,9 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
-        //
+        return House::find($user_id);
     }
 
     /**

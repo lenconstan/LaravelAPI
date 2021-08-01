@@ -26,13 +26,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/get_all_users', [AuthController::class, 'index']);
 
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/paginatedproducts', [ProductController::class, 'indexPaginated']);
 
-Route::get('/products/{$id}', [ProductController::class, 'show']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/search/{name}', [ProductController::class, 'search']);
+
+Route::post('/set_profile', [HouseController::class, 'store']);
+Route::get('/get_profiles', [HouseController::class, 'index']);
+Route::get('/get_user_profile/{id}', [HouseController::class, 'show']);
+
+Route::get('/get_images', [ImagesController::class, 'index']);
+Route::get('/get_user_images/{user_id}', [ImagesController::class, 'user']);
+Route::delete('/images/{id}', [ImagesController::class, 'destroy']);
+Route::post('/firebaseurl', [ImagesController::class, 'store']);
+
 
 
 
@@ -48,10 +59,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
     //House routes
-    Route::post('/image', [HouseController::class, 'store']);
-    Route::get('/user-images/{user_id}', [UserController::class, 'userImages']);
-
-    Route::post('/firebaseurl', [ImagesController::class, 'store']);
+    // Route::post('/set_profile', [HouseController::class, 'store']);
+    
+    //Images routes
+    
 
 
      
