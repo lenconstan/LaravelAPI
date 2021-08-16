@@ -5,6 +5,7 @@ use App\Models\House;
 
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class HouseController extends Controller
 {
@@ -48,7 +49,7 @@ class HouseController extends Controller
      */
     public function show($user_id)
     {
-        return House::find($user_id);
+        return House::where('user_id', $user_id)->get();
     }
 
     /**
@@ -58,9 +59,12 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
-        //
+        $profile  = House::where('user_id', $user_id)->first();
+        $profile->update($request->all());
+        return $profile;
+
     }
 
     /**
@@ -71,6 +75,7 @@ class HouseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        House::destroy($id);
+        return json_encode("Profile ". $id. " has been deleted successfully!");
     }
 }

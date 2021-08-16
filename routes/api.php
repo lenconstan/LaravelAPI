@@ -38,10 +38,13 @@ Route::get('/products/search/{name}', [ProductController::class, 'search']);
 Route::post('/set_profile', [HouseController::class, 'store']);
 Route::get('/get_profiles', [HouseController::class, 'index']);
 Route::get('/get_user_profile/{id}', [HouseController::class, 'show']);
+Route::post('/update_user_profile/{id}', [HouseController::class, 'update']);
+Route::delete('/delete_profile/{id}', [HouseController::class, 'destroy']);
 
 Route::get('/get_images', [ImagesController::class, 'index']);
 Route::get('/get_user_images/{user_id}', [ImagesController::class, 'user']);
 Route::delete('/images/{id}', [ImagesController::class, 'destroy']);
+Route::delete('/images/{url}', [ImagesController::class, 'destroy_url']);
 Route::post('/firebaseurl', [ImagesController::class, 'store']);
 
 
@@ -67,11 +70,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
      
 });
-
-
-
-
-
 
 
 

@@ -78,4 +78,16 @@ class ImagesController extends Controller
         Images::destroy($id);
         return json_encode("Image ". $id. " has been deleted successfully!");
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_url($url)
+    {
+        Images::where('url', 'like', '%'.$url.'%')->destroy();
+        return json_encode("Image ". $url. " has been deleted successfully!");
+    }
 }
